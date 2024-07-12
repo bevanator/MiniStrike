@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Main.unity
+    guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: a1374033c370cdc4aa5aaf572d648a0a
+  - enabled: 1
+    path: Assets/Scenes/Survival.unity
+    guid: afda2b58667ea46439f2c0ad4c876f7c
+  m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

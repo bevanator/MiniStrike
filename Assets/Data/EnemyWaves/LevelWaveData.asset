@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d926084fd5d45d4a09b2697ccc2f621, type: 3}
+  m_Name: LevelWaveData
+  m_EditorClassIdentifier: 
+  m_Waves:
+  - {fileID: 11400000, guid: 21974cb177cedd349b6c04f62a43a5d3, type: 2}
+  - {fileID: 11400000, guid: 110b0a7c917a6c84c85483bfbfce0e0c, type: 2}
+  - {fileID: 11400000, guid: 0bf11a5417970164c8c18496073c9a72, type: 2}
+  - {fileID: 11400000, guid: 5e14895e93ff0ba4fa199a14bb1a4189, type: 2}

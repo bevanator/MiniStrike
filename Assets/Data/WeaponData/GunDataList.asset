@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c060c5b2d80eccf4ab351a8a4d592b7d, type: 3}
+  m_Name: GunDataList
+  m_EditorClassIdentifier: 
+  m_WeaponDataList:
+  - Name: Glock
+    Icon: {fileID: 1737979733, guid: 3c82e411395fa6e4aa4c0b96f01f7f3f, type: 3}
+    Damage: 20
+    FireRate: 0.3
+    Range: 20
+    Multiplier: 1
+    TotalClipSize: 36
+    MagazineSize: 12
+    WeaponType: 0
+    HoldingStyle: 0
+    GunRoleType: 0
+    Index: 0
+    ReloadTime: 2
+    EquipTime: 1.5
+    Bullet: {fileID: -7089951737418502272, guid: 4c213679f6a9c944a8a0fa5c553666bc, type: 3}
+  - Name: Scar
+    Icon: {fileID: -1221328980, guid: 3c82e411395fa6e4aa4c0b96f01f7f3f, type: 3}
+    Damage: 30
+    FireRate: 0.2
+    Range: 28
+    Multiplier: 1
+    TotalClipSize: 120
+    MagazineSize: 30
+    WeaponType: 0
+    HoldingStyle: 1
+    GunRoleType: 1
+    Index: 1
+    ReloadTime: 2
+    EquipTime: 1.5
+    Bullet: {fileID: -7089951737418502272, guid: 4c213679f6a9c944a8a0fa5c553666bc, type: 3}
+  - Name: AK
+    Icon: {fileID: -1906144627, guid: 3c82e411395fa6e4aa4c0b96f01f7f3f, type: 3}
+    Damage: 40
+    FireRate: 0.2
+    Range: 30
+    Multiplier: 1
+    TotalClipSize: 120
+    MagazineSize: 30
+    WeaponType: 0
+    HoldingStyle: 1
+    GunRoleType: 1
+    Index: 2
+    ReloadTime: 2
+    EquipTime: 1.5
+    Bullet: {fileID: -7089951737418502272, guid: 4c213679f6a9c944a8a0fa5c553666bc, type: 3}
+  - Name: M4A1
+    Icon: {fileID: -1801284504, guid: 3c82e411395fa6e4aa4c0b96f01f7f3f, type: 3}
+    Damage: 30
+    FireRate: 0.2
+    Range: 35
+    Multiplier: 1
+    TotalClipSize: 120
+    MagazineSize: 30
+    WeaponType: 0
+    HoldingStyle: 1
+    GunRoleType: 1
+    Index: 3
+    ReloadTime: 2
+    EquipTime: 1.5
+    Bullet: {fileID: -7089951737418502272, guid: 4c213679f6a9c944a8a0fa5c553666bc, type: 3}
+  - Name: AWP
+    Icon: {fileID: 2050314827, guid: 3c82e411395fa6e4aa4c0b96f01f7f3f, type: 3}
+    Damage: 1000
+    FireRate: 1
+    Range: 40
+    Multiplier: 1
+    TotalClipSize: 10
+    MagazineSize: 1
+    WeaponType: 0
+    HoldingStyle: 1
+    GunRoleType: 1
+    Index: 4
+    ReloadTime: 2
+    EquipTime: 1.5
+    Bullet: {fileID: -7089951737418502272, guid: 4c213679f6a9c944a8a0fa5c553666bc, type: 3}
+  - Name: SMG
+    Icon: {fileID: -1955553236, guid: 3c82e411395fa6e4aa4c0b96f01f7f3f, type: 3}
+    Damage: 10
+    FireRate: 0.1
+    Range: 22
+    Multiplier: 1
+    TotalClipSize: 120
+    MagazineSize: 30
+    WeaponType: 0
+    HoldingStyle: 0
+    GunRoleType: 1
+    Index: 5
+    ReloadTime: 2
+    EquipTime: 1.5
+    Bullet: {fileID: -7089951737418502272, guid: 4c213679f6a9c944a8a0fa5c553666bc, type: 3}
+  - Name: Shotgun
+    Icon: {fileID: 2050314827, guid: 3c82e411395fa6e4aa4c0b96f01f7f3f, type: 3}
+    Damage: 200
+    FireRate: 1
+    Range: 10
+    Multiplier: 1
+    TotalClipSize: 120
+    MagazineSize: 30
+    WeaponType: 0
+    HoldingStyle: 1
+    GunRoleType: 1
+    Index: 6
+    ReloadTime: 2
+    EquipTime: 1.5
+    Bullet: {fileID: -7089951737418502272, guid: 4c213679f6a9c944a8a0fa5c553666bc, type: 3}
