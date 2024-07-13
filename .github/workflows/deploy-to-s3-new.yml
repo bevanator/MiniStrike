@@ -33,10 +33,10 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-north-1  # e.g., us-east-1
 
-    - name: Deploy to S3 with correct Content-Encoding
+    - name: Deploy to S3
       run: |
         aws s3 sync downloaded-artifact/WebGL s3://webglbucket --delete
-        
+
     - name: Set S3 website configuration
       run: |
         aws s3 website s3://webglbucket --index-document index.html --error-document index.html
