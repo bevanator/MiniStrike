@@ -33,37 +33,31 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-north-1  # e.g., us-east-1
 
-    - name: Deploy to S3
+    - name: Deploy to S3 with correct Content-Encoding
       run: |
-        aws s3 sync downloaded-artifact/WebGL s3://webglbucket --delete
+        aws s3 sync downloaded-artifact/WebGL s3://webglbucket --delete --exclude "*" --include "*.gz" --content-encoding gzip
+        aws s3 sync downloaded-artifact/WebGL s3://webglbucket --delete --exclude "*.gz"
 
     - name: Set S3 website configuration
       run: |
         aws s3 website s3://webglbucket --index-document index.html --error-document index.html
 
-    - name: "[Deploy Phase 2] Brotli-compressed files"
-        working-directory: downloaded-artifact
-        run: |
-          aws s3 cp ./WebGL/WebGL s3://$BUCKET \
-            --exclude="*" --include="*.br" \
-            --content-encoding br \
-            --content-type="binary/octet-stream" \
-            --metadata-directive REPLACE --recursive;
+    - name: Set MIME types
+      run: |
+        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.js" --content-type "application/javascript" --metadata-directive REPLACE --recursive
+        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.wasm" --content-type "application/wasm" --metadata-directive REPLACE --recursive
+        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.data" --content-type "application/octet-stream" --metadata-directive REPLACE --recursive
+        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.unity3d" --content-type "application/vnd.unity" --metadata-directive REPLACE --recursive
+        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.gz" --content-type "application/gzip" --metadata-directive REPLACE --recursive
 
-      - name: "[Deploy Phase 3] Brotli-compressed Javascript"
-        working-directory: downloaded-artifact
-        run: |
-          aws s3 cp ./WebGL/WebGL s3://$BUCKET \
-            --exclude="*" --include="*.js.br" \
-            --content-encoding br \
-            --content-type="application/javascript" \
-            --metadata-directive REPLACE --recursive;
-
-      - name: "[Deploy Phase 4] Brotli-compressed WASM"
-        working-directory: downloaded-artifact
-        run: |
-          aws s3 cp ./WebGL/WebGL s3://$BUCKET \
-            --exclude="*" --include="*.wasm.br" \
-            --content-encoding br \
-            --content-type="application/wasm" \
-            --metadata-directive REPLACE --recursive;
+    - name: Configure S3 CORS
+      run: |
+        aws s3api put-bucket-cors --bucket webglbucket --cors-configuration '{
+          "CORSRules": [
+            {
+              "AllowedOrigins": ["*"],
+              "AllowedMethods": ["GET", "HEAD"],
+              "AllowedHeaders": ["*"]
+            }
+          ]
+        }'
