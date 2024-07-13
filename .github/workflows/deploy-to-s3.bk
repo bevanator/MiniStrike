@@ -1,4 +1,4 @@
-name: Deploy to S3
+name: Deploy WebGL to S3
 
 on:
   workflow_run:
@@ -11,29 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
-
-
-
-
-
-steps:
+    steps:
     - name: Download artifact
       uses: dawidd6/action-download-artifact@v2
       with:
         workflow: ${{ github.event.workflow_run.workflow_id }}
-        name: Build-WebGL
-        path: downloaded-artifact
+        name: Build-WebGL  # Replace with your artifact name
 
-    - name: Debug - List contents
-      run: |
-        echo "Current directory:"
-        pwd
-        echo "Directory contents:"
-        ls -R
-
-
-
-
+    - name: Unzip build
+      run: unzip Build-WebGL.zip -d Build-WebGL
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -44,10 +30,7 @@ steps:
 
     - name: Deploy to S3
       run: |
-        aws s3 sync downloaded-artifact s3://webglbucket --delete
-
-    - name: Set S3 website configuration
-      run: |
+        aws s3 sync webgl-build s3://webglbucket --delete
         aws s3 website s3://webglbucket --index-document index.html --error-document index.html
 
     - name: Set MIME types

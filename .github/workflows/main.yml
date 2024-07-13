@@ -35,3 +35,39 @@ jobs:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
           
+    - name: Download artifact
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: ${{ github.event.workflow_run.workflow_id }}
+        name: Build-WebGL
+        path: downloaded-artifact
+
+    - name: Debug - List contents
+      run: |
+        echo "Current directory:"
+        pwd
+        echo "Directory contents:"
+        ls -R
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-north-1  # e.g., us-east-1
+
+    - name: Deploy to S3
+      run: |
+        aws s3 sync downloaded-artifact s3://webglbucket --delete
+
+    - name: Set S3 website configuration
+      run: |
+        aws s3 website s3://webglbucket --index-document index.html --error-document index.html
+
+    - name: Set MIME types
+      run: |
+        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.js" --content-type "application/javascript" --metadata-directive REPLACE --recursive
+        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.wasm" --content-type "application/wasm" --metadata-directive REPLACE --recursive
+        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.data" --content-type "application/octet-stream" --metadata-directive REPLACE --recursive
+        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.unity3d" --content-type "application/vnd.unity" --metadata-directive REPLACE --recursive
+          
