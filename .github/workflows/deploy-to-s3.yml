@@ -41,9 +41,29 @@ jobs:
       run: |
         aws s3 website s3://webglbucket --index-document index.html --error-document index.html
 
-    - name: Set MIME types
-      run: |
-        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.js" --content-type "application/javascript" --metadata-directive REPLACE --recursive
-        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.wasm" --content-type "application/wasm" --metadata-directive REPLACE --recursive
-        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.data" --content-type "application/octet-stream" --metadata-directive REPLACE --recursive
-        aws s3 cp s3://webglbucket s3://webglbucket --exclude "*" --include "*.unity3d" --content-type "application/vnd.unity" --metadata-directive REPLACE --recursive
+    - name: "[Deploy Phase 2] Brotli-compressed files"
+        working-directory: downloaded-artifact
+        run: |
+          aws s3 cp ./WebGL/WebGL s3://$BUCKET \
+            --exclude="*" --include="*.br" \
+            --content-encoding br \
+            --content-type="binary/octet-stream" \
+            --metadata-directive REPLACE --recursive;
+
+      - name: "[Deploy Phase 3] Brotli-compressed Javascript"
+        working-directory: downloaded-artifact
+        run: |
+          aws s3 cp ./WebGL/WebGL s3://$BUCKET \
+            --exclude="*" --include="*.js.br" \
+            --content-encoding br \
+            --content-type="application/javascript" \
+            --metadata-directive REPLACE --recursive;
+
+      - name: "[Deploy Phase 4] Brotli-compressed WASM"
+        working-directory: downloaded-artifact
+        run: |
+          aws s3 cp ./WebGL/WebGL s3://$BUCKET \
+            --exclude="*" --include="*.wasm.br" \
+            --content-encoding br \
+            --content-type="application/wasm" \
+            --metadata-directive REPLACE --recursive;
