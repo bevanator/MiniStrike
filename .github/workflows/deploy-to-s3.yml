@@ -35,7 +35,7 @@ jobs:
 
     - name: Deploy to S3
       run: |
-        aws s3 sync downloaded-artifact s3://webglbucket --delete
+        aws s3 sync downloaded-artifact/WebGL s3://webglbucket --delete
 
     - name: Set S3 website configuration
       run: |
