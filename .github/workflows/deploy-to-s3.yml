@@ -16,7 +16,7 @@ jobs:
       uses: dawidd6/action-download-artifact@v2
       with:
         workflow: ${{ github.event.workflow_run.workflow_id }}
-        name: webgl-build  # Replace with your artifact name
+        name: Build-WebGL  # Replace with your artifact name
 
     - name: Unzip build
       run: unzip Build-WebGL.zip -d Build-WebGL
