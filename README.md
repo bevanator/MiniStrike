@@ -1,0 +1,1 @@
+A game project inspired by Counter Strike and Mini Militia. I experimented with design patterns and low level system design, built weapon, loadout, inventory and shooting mechanics all from scratch. Also implemented a CI/CD pipeline for WebGL with this project.
